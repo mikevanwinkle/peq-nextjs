@@ -24,9 +24,9 @@ export default function MyApp({ Component, pageProps }) {
           '#240046',
           '#10002B',
           '#9D4EDD',
-          '#383a59',
           '#282a36',
-          '#10002B',
+          '#383a59',
+          '#10002B', //10
         ],
         "gray": {
           "50": "#EEF1F6",

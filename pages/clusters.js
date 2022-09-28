@@ -1,10 +1,6 @@
 import Layout from '../components/layout'
 import { getArticles, getEntities } from '../lib/api';
-import Articles from './articles';
-import EntitiesChart from '../components/EntitiesCharts'
 import { SimpleGrid } from '@mantine/core';
-import { TrendingWidget } from '../components/Trending';
-import EntitySentiment from '../components/EntitySentiment';
 import ArticleClusters from '../components/AritcleClusters';
 
 
@@ -20,8 +16,18 @@ export async function getStaticProps() {
 }
 
 
-export default function Home({articles, clusters, entities}) {
+export default function Clusters({articles, clusters, entities}) {
   return (
-    <Articles></Articles>
+    <Layout header={
+      <title>PoliticsEQ</title>
+    }>
+      <div className="container">
+        <main>
+        <SimpleGrid cols={1} spacing="lg">
+          <ArticleClusters ></ArticleClusters>
+        </SimpleGrid>
+        </main>
+      </div>
+    </Layout>
   )
 }

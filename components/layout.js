@@ -9,13 +9,12 @@ import PeqNavbar from './peqnavbar'
 import PeqHeader from './peqheader'
 
 
-export default function Layout({ children, pageProps }) {
+export default function Layout({ children,   header }) {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
-
   return (
     <>
-    <Header></Header>
+    <Header>{header}</Header>
 
     <AppShell
       padding="md"

@@ -1,8 +1,8 @@
-import { Button, Divider, Loader, Paper, SimpleGrid, Text, Table, Title, ThemeIcon, createStyles, Space, } from "@mantine/core";
+import { Popover, Loader, Paper, Text, Table, Title, ThemeIcon, createStyles } from "@mantine/core";
+import { DropdownMenuIcon } from "@radix-ui/react-icons"
 import { useState, useEffect } from "react"
 import { getTrending } from "../lib/api";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
-import { MultiToggle } from "react-multi-toggle"
 import { Chips, Chip } from "@mantine/core";
 
 const useStyles = createStyles((theme, _params, getRef) => ({
@@ -16,8 +16,14 @@ export function TrendingWidget({pageProps, children}) {
   const [loaded, setLoaded] = useState(false)
   const [trending, setTrending] = useState(null)
   const [view, setView] = useState('all')
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
+  const [popOpened, setPopOpened] = useState(false)
 
+  function setViewAndCloseToggle(view) {
+    console.log(view)
+    setView(view)
+    setPopOpened(false)
+  }
 
   useEffect(()=>{
     getTrending({'leans':view}).then((response)=> {
@@ -28,12 +34,32 @@ export function TrendingWidget({pageProps, children}) {
 
   return (
     <Paper className={classes.blockHeader} >
+      <Popover
+        position="bottom"
+        opened={popOpened}
+        // className={classes.popover}
+        target={<DropdownMenuIcon onClick={() => setPopOpened((o) => !o)} className={classes.drop} size={'sm'} />}
+        styles={{
+          popover: {
+            backgroundColor: theme.colors.dark[7]
+          },
+          root: {
+            backgroundColor: 'transparent',
+            float: 'right',
+            display: 'block',
+            position: 'unset',
+            marginRight: '1vh'
+          }
+        }}
+        >
+        <Chips size="xs" position="center" onChange={setViewAndCloseToggle} defaultValue={view} >
+          <Chip value="left">Left</Chip>
+          <Chip value="all">All</Chip>
+          <Chip value="right">Right</Chip>
+        </Chips>
+      </Popover>
       <Title order={4} align="center" style={{fontFamily: 'Montserrat', paddingTop: '.5em'}}>Trending Entities</Title>
-      <Chips size="xs" position="center" onChange={setView} defaultValue={view}>
-        <Chip value="left">Left</Chip>
-        <Chip value="all">All</Chip>
-        <Chip value="right">Right</Chip>
-      </Chips>
+
 
       {console.log(view)}
       {!trending && <Loader></Loader>}

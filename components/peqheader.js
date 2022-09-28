@@ -1,4 +1,5 @@
-import { AppShell, Burger, MediaQuery, Header, Navbar, Text, useMantineTheme} from '@mantine/core'
+import { Burger, MediaQuery, Header, Text, useMantineTheme} from '@mantine/core'
+import Link from "next/link"
 import { useState } from 'react';
 
 export default function PeqHeader({children, pageProps}) {
@@ -18,7 +19,8 @@ export default function PeqHeader({children, pageProps}) {
           />
         </MediaQuery>
 
-        <Text style={{fontFamily: 'Montserrat', fontSize: '2rem', fontWeight: 400, color: '#f2f2f2'}}>PoliticsEQ</Text>
+        {/* <Text style={{fontFamily: 'Montserrat', fontSize: '2rem', fontWeight: 400, color: '#f2f2f2'}}>PoliticsEQ</Text> */}
+        <Link href="/" ><Text style={{fontFamily: 'Montserrat', fontSize: '2em', fontWeight: 400, color: '#f2f2f2', cursor: "pointer"}}>PoliticsEQ</Text></Link>
       </div>
     </Header>
   )
